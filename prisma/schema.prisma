@@ -1,0 +1,20 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int     @id @default(autoincrement())
+  esignetSub  String  @unique @map("esignet_sub") // Link to eSignet 'sub'
+  name        String?
+  email       String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("users") // Map model name to table name
+}
